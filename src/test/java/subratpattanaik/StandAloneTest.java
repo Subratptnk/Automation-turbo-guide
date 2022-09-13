@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -59,6 +60,18 @@ public class StandAloneTest {
 		
 		driver.findElement(By.cssSelector(".totalRow button")).click();
 		
+		Actions a = new Actions(driver);
+		a.sendKeys(driver.findElement(By.cssSelector("[placeholder='Select Country']")),"india").build().perform();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
+		
+		driver.findElement(By.cssSelector(".ta-item:nth-of-type(2)")).click();
+		
+		driver.findElement(By.cssSelector(".action__submit")).click();
+		String confirmMsg = driver.findElement(By.cssSelector(".hero-primary")).getText();
+		Assert.assertTrue(confirmMsg.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
+		
+		driver.close();
 	}
 
 }
