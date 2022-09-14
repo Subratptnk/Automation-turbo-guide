@@ -34,7 +34,13 @@ public class AbstractComponent {
 		wait.until(ExpectedConditions.invisibilityOf(ele));
 	}
 	
-	public CartPage goToCart() {
+	public void waitForWebElementToAppear(WebElement ele) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait.until(ExpectedConditions.visibilityOf(ele));
+	}
+	
+	public CartPage goToCart() throws InterruptedException {
+		Thread.sleep(1000);
 		cartHeader.click();
 		CartPage cartPage = new CartPage(driver);
 		return cartPage;

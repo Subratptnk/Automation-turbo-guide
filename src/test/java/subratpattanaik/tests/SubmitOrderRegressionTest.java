@@ -1,4 +1,4 @@
-package subratpattanaik;
+package subratpattanaik.tests;
 
 import java.time.Duration;
 import java.util.List;
@@ -20,9 +20,9 @@ import subratpattanaik.pageobjects.ConfirmationPage;
 import subratpattanaik.pageobjects.LandingPage;
 import subratpattanaik.pageobjects.ProductCatalogue;
 
-public class SubmitOrderTest {
+public class SubmitOrderRegressionTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 
 		String productName= "ZARA COAT 3";
