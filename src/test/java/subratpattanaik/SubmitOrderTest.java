@@ -14,7 +14,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import subratpattanaik.pageobjects.CartPage;
+import subratpattanaik.pageobjects.CheckoutPage;
+import subratpattanaik.pageobjects.ConfirmationPage;
 import subratpattanaik.pageobjects.LandingPage;
+import subratpattanaik.pageobjects.ProductCatalogue;
 
 public class SubmitOrderTest {
 
@@ -22,6 +26,7 @@ public class SubmitOrderTest {
 		// TODO Auto-generated method stub
 
 		String productName= "ZARA COAT 3";
+		String countryname = "India";
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver = new ChromeDriver();
 		//global wait for 10 seconds
@@ -32,43 +37,21 @@ public class SubmitOrderTest {
 		 
 		LandingPage landingPage = new LandingPage(driver);
 		landingPage.goTo();
-		landingPage.loginApplication("subratp2022@testing.com", "Testing123");
+		ProductCatalogue productCatalogue =	landingPage.loginApplication("subratp2022@testing.com", "Testing123");
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".mb-3")));
-		List<WebElement> products =  driver.findElements(By.cssSelector(".mb-3"));
+		List<WebElement> productList =  productCatalogue.getProducts();
 		
-		//every iteration one product is retrived which got stored in product, 
-		// and from product element (where we need to find the actual text name of the product) and we check whose name is matching with "ZARA COAT 3"
-		WebElement prod =  products.stream()
-		.filter(product->product.findElement(By.cssSelector("b")).getText().equals(productName)).findFirst().orElse(null);
-		//clicking on the particular add to cart element
-		prod.findElement(By.cssSelector(".card-body button:last-of-type")).click();
+		productCatalogue.addProductToCart(productName);
+
+		CartPage cartPage =  productCatalogue.goToCart();
 		
-		//wait untill the toast message shwoing in your screen
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
-		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.cssSelector(".ng-animating"))));
-		
-		driver.findElement(By.cssSelector("[routerlink*='cart']")).click();
-		
-		//verify add to cart bucket is matching with the item which we are selecting
-		List<WebElement> cartProducts =  driver.findElements(By.cssSelector(".cartSection h3"));
-		Boolean match =  cartProducts.stream()
-		.anyMatch(cartProduct -> cartProduct.getText().equalsIgnoreCase(productName));
+		Boolean match = cartPage.verifyProductDisplay(productName);
 		Assert.assertTrue(match);
-		
-		driver.findElement(By.cssSelector(".totalRow button")).click();
-		
-		Actions a = new Actions(driver);
-		a.sendKeys(driver.findElement(By.cssSelector("[placeholder='Select Country']")),"india").build().perform();
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
-		
-		driver.findElement(By.cssSelector(".ta-item:nth-of-type(2)")).click();
-		
-		driver.findElement(By.cssSelector(".action__submit")).click();
-		String confirmMsg = driver.findElement(By.cssSelector(".hero-primary")).getText();
-		Assert.assertTrue(confirmMsg.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
+		CheckoutPage checkoutPage =  cartPage.goToCheckout();
+		checkoutPage.selectCountryofTransaction(countryname);
+		ConfirmationPage confirmpage = checkoutPage.submitOrder();
+		String msg = confirmpage.getOrderConfirmation();
+		Assert.assertTrue(msg.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
 		
 		driver.close();
 	}

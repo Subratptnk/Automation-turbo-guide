@@ -6,11 +6,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LandingPage {
+import subratpattanaik.abstractcomponents.AbstractComponent;
+
+public class LandingPage extends AbstractComponent{
 
 	WebDriver driver;
 	public LandingPage(WebDriver driver) {
 		//initialization page
+		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
@@ -28,10 +31,12 @@ public class LandingPage {
 	@FindBy(id="login")
 	WebElement submit;
 	
-	public void loginApplication(String email, String password ) {
+	public ProductCatalogue loginApplication(String email, String password ) {
 		userEmail.sendKeys(email);
 		Password.sendKeys(password);
 		submit.click();
+		ProductCatalogue productCatalogue = new ProductCatalogue(driver);
+		return productCatalogue;
 	}
 	
 	public void goTo() {
