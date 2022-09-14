@@ -16,7 +16,7 @@ import org.testng.Assert;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import subratpattanaik.pageobjects.LandingPage;
 
-public class StandAloneTest {
+public class SubmitOrderTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -27,16 +27,13 @@ public class StandAloneTest {
 		//global wait for 10 seconds
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		//fetch the url of test
-		driver.get("https://rahulshettyacademy.com/client/");
 		//for making the window as full screen
 		driver.manage().window().fullscreen();
 		 
 		LandingPage landingPage = new LandingPage(driver);
+		landingPage.goTo();
+		landingPage.loginApplication("subratp2022@testing.com", "Testing123");
 		
-		driver.findElement(By.id("userEmail")).sendKeys("subratp2022@testing.com");
-		driver.findElement(By.id("userPassword")).sendKeys("Testing123");
-		driver.findElement(By.id("login")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".mb-3")));
 		List<WebElement> products =  driver.findElements(By.cssSelector(".mb-3"));
 		
