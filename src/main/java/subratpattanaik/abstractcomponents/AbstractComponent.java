@@ -39,6 +39,10 @@ public class AbstractComponent {
 		CartPage cartPage = new CartPage(driver);
 		return cartPage;
 	}
+	
+	public void makeWindowFullScreen() {
+		driver.manage().window().fullscreen();
+	}
 
 	
 }

@@ -29,13 +29,12 @@ public class SubmitOrderTest {
 		String countryname = "India";
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver = new ChromeDriver();
-		//global wait for 10 seconds
+
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		//for making the window as full screen
-		driver.manage().window().fullscreen();
-		 
+		
 		LandingPage landingPage = new LandingPage(driver);
+		landingPage.makeWindowFullScreen();
 		landingPage.goTo();
 		ProductCatalogue productCatalogue =	landingPage.loginApplication("subratp2022@testing.com", "Testing123");
 		
