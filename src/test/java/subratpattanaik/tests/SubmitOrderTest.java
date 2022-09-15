@@ -2,6 +2,7 @@ package subratpattanaik.tests;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -14,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -26,22 +28,22 @@ import subratpattanaik.pageobjects.ProductCatalogue;
 import subratpattanaik.testcomponents.BaseTest;
 
 public class SubmitOrderTest extends BaseTest {
-	String productName= "ZARA COAT 3";
-		@Test
-		public void submitOrder() throws IOException, InterruptedException {
+	//String productName= "ZARA COAT 3";
+		@Test(dataProvider = "getData", groups = "PurchaseOrders")
+		public void submitOrder(HashMap<String,String> input) throws IOException, InterruptedException {
 		
 	
 		String countryname = "India";
 	
-		ProductCatalogue productCatalogue =	landingpage.loginApplication("subratp2022@testing.com", "Testing123");
+		ProductCatalogue productCatalogue =	landingpage.loginApplication(input.get("email"),input.get("password"));
 		
 		List<WebElement> productList =  productCatalogue.getProducts();
 		
-		productCatalogue.addProductToCart(productName);
+		productCatalogue.addProductToCart(input.get("product"));
 
 		CartPage cartPage =  productCatalogue.goToCart();
 		
-		Boolean match = cartPage.verifyProductDisplay(productName);
+		Boolean match = cartPage.verifyProductDisplay(input.get("product"));
 		Assert.assertTrue(match);
 		CheckoutPage checkoutPage =  cartPage.goToCheckout();
 		checkoutPage.selectCountryofTransaction(countryname);
@@ -52,13 +54,31 @@ public class SubmitOrderTest extends BaseTest {
 		
 	}
 		
-	@Test(dependsOnMethods = {"submitOrder"})
-	public void orderHistoryTest() throws InterruptedException {
+	@Test(dependsOnMethods = {"submitOrder"},dataProvider = "getData")
+	public void orderHistoryTest(HashMap<String,String> input) throws InterruptedException {
 		
-		ProductCatalogue productCatalogue =	landingpage.loginApplication("subratp2022@testing.com", "Testing123");
+		ProductCatalogue productCatalogue =	landingpage.loginApplication(input.get("email"),input.get("password"));
 		OrderPage orderpage =  productCatalogue.goToOrderPage();
-		Assert.assertTrue(orderpage.verifyOrderDisplay(productName)); 
+		Assert.assertTrue(orderpage.verifyOrderDisplay(input.get("product"))); 
 	}
 	
+	
+	@DataProvider
+	public Object[][] getData() {
+		
+		HashMap<String, String> map = new HashMap<String,String>();
+		map.put("email", "subratp2022@testing.com");
+		map.put("password", "Testing123");
+		map.put("product", "ZARA COAT 3");
+		
+		
+		  HashMap<String, String> map1 = new HashMap<String,String>(); 
+		  map1.put("email","subratp2021@testing.com"); 
+		  map1.put("password", "Testing123");
+		  map1.put("product", "ADIDAS ORIGINAL");
+		 
+		
+		return new Object[][] { {map},{map1} };
+	}
 
 }
