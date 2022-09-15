@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+<testng-results ignored="2" total="4" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-09-14T22:59:55 IST" name="Default suite" finished-at="2022-09-14T23:00:20 IST" duration-ms="24826">
+  <suite started-at="2022-09-15T18:40:29 IST" name="Suite" finished-at="2022-09-15T18:41:01 IST" duration-ms="32142">
     <groups>
+      <group name="Errorhandling">
+        <method signature="ErrorValidations.ProductErrorValidation()[pri:0, instance:subratpattanaik.tests.ErrorValidations@327514f]" name="ProductErrorValidation" class="subratpattanaik.tests.ErrorValidations"/>
+        <method signature="ErrorValidations.submitOrder()[pri:0, instance:subratpattanaik.tests.ErrorValidations@327514f]" name="submitOrder" class="subratpattanaik.tests.ErrorValidations"/>
+      </group> <!-- Errorhandling -->
     </groups>
-    <test started-at="2022-09-14T22:59:55 IST" name="Default test" finished-at="2022-09-14T23:00:20 IST" duration-ms="24826">
+    <test started-at="2022-09-15T18:40:29 IST" name="Submit Order Test" finished-at="2022-09-15T18:40:29 IST" duration-ms="17">
+    </test> <!-- Submit Order Test -->
+    <test started-at="2022-09-15T18:40:29 IST" name="Error Validation Test" finished-at="2022-09-15T18:41:01 IST" duration-ms="32142">
       <class name="subratpattanaik.tests.ErrorValidations">
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:subratpattanaik.tests.ErrorValidations@1b7cc17c]" started-at="2022-09-14T22:59:55 IST" name="launchApplication" finished-at="2022-09-14T23:00:00 IST" duration-ms="5140" status="PASS">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:subratpattanaik.tests.ErrorValidations@327514f]" started-at="2022-09-15T18:40:29 IST" name="launchApplication" finished-at="2022-09-15T18:40:38 IST" duration-ms="8923" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchApplication -->
-        <test-method signature="ProductErrorValidation()[pri:0, instance:subratpattanaik.tests.ErrorValidations@1b7cc17c]" started-at="2022-09-14T23:00:00 IST" name="ProductErrorValidation" finished-at="2022-09-14T23:00:15 IST" duration-ms="14912" status="PASS">
+        <test-method signature="ProductErrorValidation()[pri:0, instance:subratpattanaik.tests.ErrorValidations@327514f]" started-at="2022-09-15T18:40:38 IST" name="ProductErrorValidation" finished-at="2022-09-15T18:40:54 IST" duration-ms="16153" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- ProductErrorValidation -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:subratpattanaik.tests.ErrorValidations@1b7cc17c]" started-at="2022-09-14T23:00:15 IST" name="tearDown" finished-at="2022-09-14T23:00:15 IST" duration-ms="79" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:subratpattanaik.tests.ErrorValidations@327514f]" started-at="2022-09-15T18:40:54 IST" name="tearDown" finished-at="2022-09-15T18:40:54 IST" duration-ms="166" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="launchApplication()[pri:0, instance:subratpattanaik.tests.ErrorValidations@1b7cc17c]" started-at="2022-09-14T23:00:15 IST" name="launchApplication" finished-at="2022-09-14T23:00:20 IST" duration-ms="4159" status="PASS">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:subratpattanaik.tests.ErrorValidations@327514f]" started-at="2022-09-15T18:40:54 IST" name="launchApplication" finished-at="2022-09-15T18:41:00 IST" duration-ms="5759" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchApplication -->
-        <test-method signature="submitOrder()[pri:0, instance:subratpattanaik.tests.ErrorValidations@1b7cc17c]" started-at="2022-09-14T23:00:20 IST" name="submitOrder" finished-at="2022-09-14T23:00:20 IST" duration-ms="420" status="PASS">
+        <test-method signature="submitOrder()[pri:0, instance:subratpattanaik.tests.ErrorValidations@327514f]" started-at="2022-09-15T18:41:00 IST" name="submitOrder" finished-at="2022-09-15T18:41:01 IST" duration-ms="856" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- submitOrder -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:subratpattanaik.tests.ErrorValidations@1b7cc17c]" started-at="2022-09-14T23:00:20 IST" name="tearDown" finished-at="2022-09-14T23:00:20 IST" duration-ms="73" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:subratpattanaik.tests.ErrorValidations@327514f]" started-at="2022-09-15T18:41:01 IST" name="tearDown" finished-at="2022-09-15T18:41:01 IST" duration-ms="184" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- subratpattanaik.tests.ErrorValidations -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- Error Validation Test -->
+  </suite> <!-- Suite -->
 </testng-results>

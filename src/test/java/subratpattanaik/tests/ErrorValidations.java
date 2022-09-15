@@ -15,14 +15,14 @@ import subratpattanaik.testcomponents.BaseTest;
 
 public class ErrorValidations extends BaseTest {
 	
-	@Test
+	@Test(groups = "Errorhandling")
 	public void submitOrder() {
 	    landingpage.loginApplication("subratp2021@testing.com", "Testing123");
 	    landingpage.getErrorText();
 	    Assert.assertEquals("Incorrect email or password.", landingpage.getErrorText());
 	}
 	
-	@Test
+	@Test(groups = "Errorhandling")
 	public void ProductErrorValidation() throws IOException, InterruptedException {
 	
 	String productName= "ZARA COAT 3";

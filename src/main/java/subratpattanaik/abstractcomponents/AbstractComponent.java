@@ -24,6 +24,9 @@ public class AbstractComponent {
 	@FindBy(css = "[routerlink*='cart']")
 	WebElement cartHeader;
 	
+	@FindBy(css = "[routerlink*='myorders']")
+	WebElement orderHeader;
+	
 	public void waitForElementToAppear(By findBy) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(findBy));
@@ -44,6 +47,13 @@ public class AbstractComponent {
 		cartHeader.click();
 		CartPage cartPage = new CartPage(driver);
 		return cartPage;
+	}
+	
+	public OrderPage goToOrderPage() throws InterruptedException {
+		Thread.sleep(1000);
+		orderHeader.click();
+		OrderPage orderPage = new OrderPage(driver);
+		return orderPage;
 	}
 	
 	public void makeWindowFullScreen() {

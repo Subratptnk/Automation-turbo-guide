@@ -17,6 +17,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import subratpattanaik.abstractcomponents.OrderPage;
 import subratpattanaik.pageobjects.CartPage;
 import subratpattanaik.pageobjects.CheckoutPage;
 import subratpattanaik.pageobjects.ConfirmationPage;
@@ -25,11 +26,11 @@ import subratpattanaik.pageobjects.ProductCatalogue;
 import subratpattanaik.testcomponents.BaseTest;
 
 public class SubmitOrderTest extends BaseTest {
-	
+	String productName= "ZARA COAT 3";
 		@Test
 		public void submitOrder() throws IOException, InterruptedException {
 		
-		String productName= "ZARA COAT 3";
+	
 		String countryname = "India";
 	
 		ProductCatalogue productCatalogue =	landingpage.loginApplication("subratp2022@testing.com", "Testing123");
@@ -50,5 +51,14 @@ public class SubmitOrderTest extends BaseTest {
 		
 		
 	}
+		
+	@Test(dependsOnMethods = {"submitOrder"})
+	public void orderHistoryTest() throws InterruptedException {
+		
+		ProductCatalogue productCatalogue =	landingpage.loginApplication("subratp2022@testing.com", "Testing123");
+		OrderPage orderpage =  productCatalogue.goToOrderPage();
+		Assert.assertTrue(orderpage.verifyOrderDisplay(productName)); 
+	}
+	
 
 }
