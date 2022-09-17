@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -56,11 +58,18 @@ public List<HashMap<String, String>> getJsonData(String filepath) throws IOExcep
 	});
 	
 	return data;
-	
 		
-		
-			
 	}
+
+    public String getScreenshot(String testCaseName, WebDriver driver) throws IOException {
+	
+	//cast driver to screenshot mode
+	TakesScreenshot ts = (TakesScreenshot) driver;
+	File source =  ts.getScreenshotAs(OutputType.FILE);
+	File file = new File(System.getProperty("user.dir")+"//Reports//"+ testCaseName+ ".png");
+	FileUtils.copyFile(source, file );
+	return System.getProperty("user.dir")+"//Reports//"+ testCaseName+ ".png" ;
+}
 	
 	@BeforeMethod(alwaysRun = true)
 	public LandingPage launchApplication() throws IOException {

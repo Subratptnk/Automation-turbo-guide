@@ -65,19 +65,7 @@ public class SubmitOrderTest extends BaseTest {
 		OrderPage orderpage =  productCatalogue.goToOrderPage();
 		Assert.assertTrue(orderpage.verifyOrderDisplay(input.get("product"))); 
 	}
-	
-	
-	public String getScreenshot(String testCaseName) throws IOException {
-		
-		//cast driver to screenshot mode
-		TakesScreenshot ts = (TakesScreenshot) driver;
-		File source =  ts.getScreenshotAs(OutputType.FILE);
-		File file = new File(System.getProperty("user.dir")+"//Reports//"+ testCaseName+ ".png");
-		FileUtils.copyFile(source, file );
-		return System.getProperty("user.dir")+"//Reports//"+ testCaseName+ ".png" ;
-	}
-	
-	
+
 	@DataProvider
 	public Object[][] getData() throws IOException {
 		

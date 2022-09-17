@@ -16,10 +16,10 @@ import subratpattanaik.testcomponents.BaseTest;
 public class ErrorValidations extends BaseTest {
 	
 	@Test(groups = "Errorhandling")
-	public void submitOrder() {
-	    landingpage.loginApplication("subratp2021@testing.com", "Testing123");
+	public void LoginErrorValidation() {
+	    landingpage.loginApplication("subratp2020@testing.com", "Testing123");
 	    landingpage.getErrorText();
-	    Assert.assertEquals("Incorrect email or password.", landingpage.getErrorText());
+	    Assert.assertEquals("Incorrect email  password.", landingpage.getErrorText());
 	}
 	
 	@Test(groups = "Errorhandling")
